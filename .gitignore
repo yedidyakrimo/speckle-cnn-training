@@ -140,9 +140,13 @@ dmypy.json
 data/
 datasets/
 *.csv
-*.json
+# *.json  # Commented out to allow config files
 *.npy
 *.npz
+
+# But ignore specific data JSON files
+data_*.json
+results_*.json
 
 # Output files
 outputs/

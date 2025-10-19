@@ -1,0 +1,51 @@
+{
+  "data": {
+    "data_dir": "path/to/your/video/data",
+    "block_size": 50,
+    "frame_size": [224, 224],
+    "test_size": 0.2,
+    "k_folds": 5
+  },
+  "model": {
+    "conv1_channels": 64,
+    "conv2_channels": 128,
+    "conv3_channels": 256,
+    "kernel_size": 3,
+    "padding": 1,
+    "pool_size": 2,
+    "fc_hidden_size": 512,
+    "dropout": 0.3
+  },
+  "training": {
+    "batch_size": 32,
+    "epochs": 50,
+    "learning_rate": 0.0005,
+    "optimizer": "AdamW",
+    "num_workers": 12,
+    "pin_memory": true,
+    "persistent_workers": true,
+    "gradient_accumulation_steps": 1,
+    "weight_decay": 0.01,
+    "scheduler": "CosineAnnealingLR",
+    "scheduler_params": {
+      "T_max": 50,
+      "eta_min": 0.00001
+    }
+  },
+  "gpu": {
+    "use_gpu": true,
+    "gpu_id": 0,
+    "mixed_precision": true,
+    "compile_model": true,
+    "memory_fraction": 0.95,
+    "allow_growth": true
+  },
+  "performance": {
+    "prefetch_factor": 4,
+    "cache_dataset": false,
+    "use_amp": true,
+    "gradient_clip_norm": 0.5,
+    "early_stopping_patience": 10,
+    "save_best_model": true
+  }
+}
