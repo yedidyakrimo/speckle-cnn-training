@@ -1,62 +1,62 @@
-# טיפים לביצועים - Speckle CNN Training
+# Performance Tips - Speckle CNN Training
 
-## אופטימיזציות GPU
+## GPU Optimizations
 
-### 1. הגדרות זיכרון GPU
+### 1. GPU Memory Settings
 ```json
 "gpu": {
-    "memory_fraction": 0.9,  // השתמש ב-90% מהזיכרון
-    "allow_growth": true     // הגדל זיכרון דינמית
+    "memory_fraction": 0.9,  // Use 90% of memory
+    "allow_growth": true     // Dynamic memory growth
 }
 ```
 
 ### 2. Mixed Precision Training
 ```json
 "gpu": {
-    "mixed_precision": true  // הפעל mixed precision
+    "mixed_precision": true  // Enable mixed precision
 }
 ```
-- חוסך ~50% זיכרון
-- מהיר יותר ב-1.5-2x
-- דורש GPU עם Tensor Cores (RTX 20xx+)
+- Saves ~50% memory
+- 1.5-2x faster
+- Requires GPU with Tensor Cores (RTX 20xx+)
 
 ### 3. Model Compilation (PyTorch 2.0+)
 ```json
 "gpu": {
-    "compile_model": true  // קומפל את המודל
+    "compile_model": true  // Compile the model
 }
 ```
-- מהיר יותר ב-20-30%
-- דורש PyTorch 2.0+
+- 20-30% faster
+- Requires PyTorch 2.0+
 
-## אופטימיזציות DataLoader
+## DataLoader Optimizations
 
-### 1. הגדרות Worker
+### 1. Worker Settings
 ```json
 "training": {
-    "num_workers": 8,           // מספר workers
-    "pin_memory": true,         // pin memory
-    "persistent_workers": true  // שמור workers
+    "num_workers": 8,           // Number of workers
+    "pin_memory": true,         // Pin memory
+    "persistent_workers": true  // Keep workers
 }
 ```
 
 ### 2. Prefetch Factor
 ```json
 "performance": {
-    "prefetch_factor": 2  // טען 2 batches מראש
+    "prefetch_factor": 2  // Prefetch 2 batches
 }
 ```
 
-## אופטימיזציות אימון
+## Training Optimizations
 
 ### 1. Gradient Accumulation
 ```json
 "training": {
-    "gradient_accumulation_steps": 2  // צבור gradients
+    "gradient_accumulation_steps": 2  // Accumulate gradients
 }
 ```
-- מאפשר batch size גדול יותר
-- חוסך זיכרון
+- Allows larger batch size
+- Saves memory
 
 ### 2. Learning Rate Scheduling
 ```json
@@ -72,11 +72,11 @@
 ### 3. Early Stopping
 ```json
 "performance": {
-    "early_stopping_patience": 5  // עצור אחרי 5 epochs ללא שיפור
+    "early_stopping_patience": 5  // Stop after 5 epochs without improvement
 }
 ```
 
-## הגדרות לפי סוג GPU
+## Settings by GPU Type
 
 ### RTX 4090 / RTX 3090 Ti (24GB+)
 ```json
@@ -124,7 +124,7 @@
 }
 ```
 
-### GPU עם זיכרון נמוך (4-6GB)
+### Low Memory GPU (4-6GB)
 ```json
 {
     "training": {
@@ -140,57 +140,57 @@
 }
 ```
 
-## טיפים כלליים
+## General Tips
 
-### 1. ניטור זיכרון
+### 1. Memory Monitoring
 ```python
-# בדוק שימוש זיכרון
+# Check memory usage
 print(f"GPU Memory: {torch.cuda.memory_allocated() / 1024**3:.1f} GB")
 print(f"Peak Memory: {torch.cuda.max_memory_allocated() / 1024**3:.1f} GB")
 ```
 
-### 2. ניקוי זיכרון
+### 2. Memory Cleanup
 ```python
-# נקה זיכרון בין folds
+# Clear memory between folds
 torch.cuda.empty_cache()
 ```
 
-### 3. הגדרות מערכת
-- סגור תוכנות אחרות
-- השתמש ב-SSD לאחסון נתונים
-- ודא שיש מספיק RAM (16GB+)
+### 3. System Settings
+- Close other applications
+- Use SSD for data storage
+- Ensure sufficient RAM (16GB+)
 
-### 4. בדיקת ביצועים
+### 4. Performance Testing
 ```bash
-# בדוק שימוש GPU
+# Check GPU usage
 nvidia-smi
 
-# הרץ בדיקת ביצועים
+# Run performance test
 python check_gpu.py
 ```
 
-## פתרון בעיות נפוצות
+## Troubleshooting Common Issues
 
 ### 1. Out of Memory
-- הקטן batch_size
-- הפעל gradient_accumulation_steps
-- הקטן memory_fraction
-- השתמש ב-mixed_precision
+- Reduce batch_size
+- Enable gradient_accumulation_steps
+- Reduce memory_fraction
+- Use mixed_precision
 
-### 2. איטיות
-- הגדל num_workers
-- הפעל pin_memory
-- השתמש ב-persistent_workers
-- הפעל model compilation
+### 2. Slow Performance
+- Increase num_workers
+- Enable pin_memory
+- Use persistent_workers
+- Enable model compilation
 
-### 3. שגיאות CUDA
-- בדוק גרסת CUDA
-- התקן PyTorch עם CUDA support
-- בדוק תאימות GPU
+### 3. CUDA Errors
+- Check CUDA version
+- Install PyTorch with CUDA support
+- Check GPU compatibility
 
-## מדידת ביצועים
+## Performance Measurement
 
-### 1. זמן אימון
+### 1. Training Time
 ```python
 import time
 start_time = time.time()
@@ -198,7 +198,7 @@ start_time = time.time()
 print(f"Training took {time.time() - start_time:.2f} seconds")
 ```
 
-### 2. שימוש זיכרון
+### 2. Memory Usage
 ```python
 import psutil
 print(f"RAM usage: {psutil.virtual_memory().percent}%")
@@ -207,7 +207,7 @@ print(f"GPU usage: {torch.cuda.memory_allocated() / 1024**3:.1f} GB")
 
 ### 3. Throughput
 ```python
-# דוגמאות לשנייה
+# Samples per second
 samples_per_second = len(dataset) / training_time
 print(f"Throughput: {samples_per_second:.2f} samples/sec")
 ```

@@ -1,124 +1,124 @@
 # Speckle CNN Training with GPU Optimization
 
-פרויקט לאימון מודל CNN לזיהוי דפוסי speckle עם אופטימיזציות GPU מתקדמות.
+A project for training CNN models to recognize speckle patterns with advanced GPU optimizations.
 
-## התקנה
+## Installation
 
-### התקנה אוטומטית (מומלץ)
+### Automatic Installation (Recommended)
 ```bash
 python setup.py
 ```
 
-### התקנה ידנית
-1. התקן את החבילות הנדרשות:
+### Manual Installation
+1. Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. בדוק את זמינות ה-GPU:
+2. Check GPU availability:
 ```bash
 python check_gpu.py
 ```
 
-3. ודא שיש לך CUDA מותקן על המחשב (לשימוש ב-GPU).
+3. Ensure you have CUDA installed on your computer (for GPU usage).
 
-### דרישות מערכת
+### System Requirements
 - Python 3.8+
-- NVIDIA GPU עם CUDA support (לשימוש ב-GPU)
-- 16+ GB RAM (מומלץ 32+ GB)
-- 10+ GB שטח דיסק פנוי
+- NVIDIA GPU with CUDA support (for GPU usage)
+- 16+ GB RAM (recommended 32+ GB)
+- 10+ GB free disk space
 
-## טיפים לביצועים
-למדריך מפורט לאופטימיזציות ביצועים, ראה [PERFORMANCE_TIPS.md](PERFORMANCE_TIPS.md)
+## Performance Tips
+For detailed performance optimization guide, see [PERFORMANCE_TIPS.md](PERFORMANCE_TIPS.md)
 
-## קונפיגורציה
+## Configuration
 
-הקובץ `config.json` מכיל את כל ההגדרות:
+The `config.json` file contains all settings:
 
-### הגדרות GPU
-- `use_gpu`: הפעל/כבה שימוש ב-GPU
-- `gpu_id`: מזהה GPU (0, 1, וכו')
-- `mixed_precision`: שימוש ב-mixed precision training
-- `compile_model`: קומפילציה של המודל לביצועים טובים יותר
-- `memory_fraction`: חלק מהזיכרון הזמין לשימוש (0.9 = 90%)
-- `allow_growth`: הגדלת זיכרון GPU דינמית
+### GPU Settings
+- `use_gpu`: Enable/disable GPU usage
+- `gpu_id`: GPU identifier (0, 1, etc.)
+- `mixed_precision`: Use mixed precision training
+- `compile_model`: Compile model for better performance
+- `memory_fraction`: Fraction of available memory to use (0.9 = 90%)
+- `allow_growth`: Dynamic GPU memory growth
 
-### הגדרות אימון
-- `batch_size`: גודל batch (16)
-- `epochs`: מספר epochs (20)
-- `learning_rate`: קצב למידה (0.001)
-- `optimizer`: אופטימייזר (AdamW)
-- `num_workers`: מספר worker processes לטעינת נתונים (8)
-- `gradient_accumulation_steps`: צעדי הצטברות gradient (2)
-- `weight_decay`: דעיכת משקלים (0.01)
+### Training Settings
+- `batch_size`: Batch size (16)
+- `epochs`: Number of epochs (20)
+- `learning_rate`: Learning rate (0.001)
+- `optimizer`: Optimizer (AdamW)
+- `num_workers`: Number of worker processes for data loading (8)
+- `gradient_accumulation_steps`: Gradient accumulation steps (2)
+- `weight_decay`: Weight decay (0.01)
 
-### הגדרות ביצועים
-- `pin_memory`: שימוש ב-pin memory
-- `persistent_workers`: שמירת workers בין epochs
-- `prefetch_factor`: גורם prefetch
-- `gradient_clip_norm`: גזירת gradient
-- `early_stopping_patience`: סבלנות לעצירה מוקדמת
-- `save_best_model`: שמירת המודל הטוב ביותר
+### Performance Settings
+- `pin_memory`: Use pin memory
+- `persistent_workers`: Keep workers between epochs
+- `prefetch_factor`: Prefetch factor
+- `gradient_clip_norm`: Gradient clipping
+- `early_stopping_patience`: Early stopping patience
+- `save_best_model`: Save best model
 
-## הרצה
+## Usage
 
-### הרצה בסיסית
+### Basic Usage
 ```bash
 python train_speckles_cnn.py
 ```
 
-### הרצה עם קונפיגורציות שונות
+### Running with Different Configurations
 
 #### Windows (Double-click)
-- `run_gpu.bat` - הרצה עם GPU
-- `run_cpu.bat` - הרצה עם CPU
+- `run_gpu.bat` - Run with GPU
+- `run_cpu.bat` - Run with CPU
 
 #### Command Line
 ```bash
-# הרצה עם הגדרות GPU מתקדמות
+# Run with advanced GPU settings
 python run_training.py --gpu
 
-# הרצה עם הגדרות CPU
+# Run with CPU settings
 python run_training.py --cpu
 
-# הרצה עם קובץ קונפיג ספציפי
+# Run with specific config file
 python run_training.py --config config_high_performance.json
 ```
 
-### קבצי קונפיגורציה זמינים
-- `config.json`: הגדרות בסיסיות עם GPU
-- `config_high_performance.json`: הגדרות מתקדמות למחשבים חזקים
-- `config_cpu.json`: הגדרות לאימון על CPU בלבד
+### Available Configuration Files
+- `config.json`: Basic settings with GPU
+- `config_high_performance.json`: Advanced settings for powerful computers
+- `config_cpu.json`: Settings for CPU-only training
 
-### דוגמאות שימוש
+### Usage Examples
 ```bash
-# הרץ דוגמאות שונות
+# Run various examples
 python examples.py
 
-# בדוק את זמינות ה-GPU
+# Check GPU availability
 python check_gpu.py
 ```
 
-## אופטימיזציות שהוספו
+## Optimizations Added
 
-1. **Mixed Precision Training**: שימוש ב-AMP לביצועים מהירים יותר
+1. **Mixed Precision Training**: Using AMP for faster performance
 2. **DataLoader Optimization**: pin_memory, persistent_workers, prefetch_factor
-3. **Gradient Accumulation**: אימון עם batches גדולים יותר
-4. **Learning Rate Scheduling**: CosineAnnealingLR או ReduceLROnPlateau
-5. **Early Stopping**: עצירה מוקדמת למניעת overfitting
-6. **Model Compilation**: קומפילציה של המודל (PyTorch 2.0+)
-7. **Memory Management**: ניהול זיכרון GPU מתקדם
-8. **Best Model Saving**: שמירת המודל עם הvalidation loss הנמוך ביותר
+3. **Gradient Accumulation**: Training with larger batches
+4. **Learning Rate Scheduling**: CosineAnnealingLR or ReduceLROnPlateau
+5. **Early Stopping**: Early stopping to prevent overfitting
+6. **Model Compilation**: Model compilation (PyTorch 2.0+)
+7. **Memory Management**: Advanced GPU memory management
+8. **Best Model Saving**: Save model with lowest validation loss
 
-## פלטים
+## Outputs
 
-- `predictions.csv`: תחזיות המודל
-- `speckle_cnn.pth`: המודל הטוב ביותר
-- `normalized_confusion_matrix.png`: מטריצת בלבול מנורמלת
+- `predictions.csv`: Model predictions
+- `speckle_cnn.pth`: Best model
+- `normalized_confusion_matrix.png`: Normalized confusion matrix
 
-## דרישות מערכת
+## System Requirements
 
-- GPU עם CUDA support (מומלץ RTX 3090 Ti או דומה)
+- GPU with CUDA support (recommended RTX 3090 Ti or similar)
 - 16+ GB RAM
 - Python 3.8+
-- PyTorch עם CUDA support
+- PyTorch with CUDA support

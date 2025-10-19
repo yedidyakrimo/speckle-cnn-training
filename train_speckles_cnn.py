@@ -124,7 +124,7 @@ def load_data(data_dir, block_size, frame_size):
     """
     Loads videos from 'yes'/'no' folders and extracts blocks.
     Args:
-        data_dir: Path to video folder (D:/sergag/AI code Sergey Agdarov/Videos/Lili/TNT/Amygdala).
+        data_dir: Path to video folder.
         block_size: Number of frames in block.
         frame_size: Frame size.
     Returns:
@@ -375,7 +375,7 @@ def main(config_path='config.json'):
         k_folds = 5
 
     # Explicit paths for saving files
-    output_dir = config['data']['data_dir']  # D:\sergag\AI code Sergey Agdarov\Videos\Lili\TNT\Amygdala
+    output_dir = config['data']['data_dir']  # Update this path to your data directory
     predictions_path = os.path.join(output_dir, 'predictions.csv')
     model_path = os.path.join(output_dir, 'speckle_cnn.pth')
 

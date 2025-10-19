@@ -1,23 +1,23 @@
 # Changelog - Speckle CNN Training Optimization
 
-## גרסה 2.0 - GPU Optimization Release
+## Version 2.0 - GPU Optimization Release
 
-### שיפורים עיקריים
+### Major Improvements
 
-#### 1. תמיכה מלאה ב-GPU
-- ✅ תמיכה ב-RTX 3090 Ti ו-GPU מתקדמים אחרים
-- ✅ Mixed Precision Training (AMP) לביצועים מהירים יותר
-- ✅ Model Compilation (PyTorch 2.0+) לביצועים משופרים
-- ✅ ניהול זיכרון GPU מתקדם
-- ✅ תמיכה ב-multiple GPUs
+#### 1. Full GPU Support
+- ✅ Support for RTX 3090 Ti and other advanced GPUs
+- ✅ Mixed Precision Training (AMP) for faster performance
+- ✅ Model Compilation (PyTorch 2.0+) for improved performance
+- ✅ Advanced GPU memory management
+- ✅ Multiple GPU support
 
-#### 2. אופטימיזציות DataLoader
-- ✅ pin_memory ו-persistent_workers
-- ✅ prefetch_factor מותאם
-- ✅ num_workers מותאם למחשב
-- ✅ non_blocking data transfer
+#### 2. DataLoader Optimizations
+- ✅ pin_memory and persistent_workers
+- ✅ Optimized prefetch_factor
+- ✅ Computer-adapted num_workers
+- ✅ Non-blocking data transfer
 
-#### 3. שיפורי אימון
+#### 3. Training Improvements
 - ✅ Gradient Accumulation
 - ✅ Learning Rate Scheduling (CosineAnnealingLR, ReduceLROnPlateau)
 - ✅ Early Stopping
@@ -25,39 +25,39 @@
 - ✅ Weight Decay
 - ✅ Best Model Saving
 
-#### 4. קבצי קונפיגורציה
-- ✅ `config.json` - הגדרות בסיסיות
-- ✅ `config_high_performance.json` - למחשבים חזקים
-- ✅ `config_cpu.json` - לאימון על CPU
+#### 4. Configuration Files
+- ✅ `config.json` - Basic settings
+- ✅ `config_high_performance.json` - For powerful computers
+- ✅ `config_cpu.json` - For CPU-only training
 
-#### 5. כלי עזר
-- ✅ `check_gpu.py` - בדיקת זמינות GPU
-- ✅ `run_training.py` - הרצה עם אופציות
-- ✅ `setup.py` - התקנה אוטומטית
-- ✅ `examples.py` - דוגמאות שימוש
+#### 5. Helper Tools
+- ✅ `check_gpu.py` - GPU availability check
+- ✅ `run_training.py` - Run with options
+- ✅ `setup.py` - Automatic installation
+- ✅ `examples.py` - Usage examples
 
-#### 6. קבצי הרצה
-- ✅ `run_gpu.bat` - הרצה עם GPU (Windows)
-- ✅ `run_cpu.bat` - הרצה עם CPU (Windows)
+#### 6. Run Scripts
+- ✅ `run_gpu.bat` - Run with GPU (Windows)
+- ✅ `run_cpu.bat` - Run with CPU (Windows)
 
-#### 7. תיעוד
-- ✅ `README.md` - מדריך מפורט
-- ✅ `PERFORMANCE_TIPS.md` - טיפים לביצועים
-- ✅ `requirements.txt` - חבילות נדרשות
+#### 7. Documentation
+- ✅ `README.md` - Detailed guide
+- ✅ `PERFORMANCE_TIPS.md` - Performance tips
+- ✅ `requirements.txt` - Required packages
 
-### שיפורי ביצועים
+### Performance Improvements
 
 #### GPU (RTX 3090 Ti)
-- **מהירות**: 3-5x מהיר יותר מ-CPU
-- **זיכרון**: חיסכון של 50% עם mixed precision
-- **Throughput**: עד 2x יותר samples לשנייה
+- **Speed**: 3-5x faster than CPU
+- **Memory**: 50% savings with mixed precision
+- **Throughput**: Up to 2x more samples per second
 
 #### CPU
-- **אופטימיזציה**: gradient accumulation
-- **זיכרון**: cache dataset
-- **Parallelism**: num_workers מותאם
+- **Optimization**: gradient accumulation
+- **Memory**: cache dataset
+- **Parallelism**: adapted num_workers
 
-### הגדרות מומלצות
+### Recommended Settings
 
 #### RTX 3090 Ti (24GB)
 ```json
@@ -103,90 +103,90 @@
 }
 ```
 
-### קבצים שנוצרו/עודכנו
+### Files Created/Updated
 
-#### קבצים עיקריים
-- `train_speckles_cnn.py` - הקוד הראשי (עודכן)
-- `config.json` - קונפיגורציה בסיסית (עודכן)
+#### Main Files
+- `train_speckles_cnn.py` - Main code (updated)
+- `config.json` - Basic configuration (updated)
 
-#### קבצי קונפיגורציה
-- `config_high_performance.json` - חדש
-- `config_cpu.json` - חדש
+#### Configuration Files
+- `config_high_performance.json` - New
+- `config_cpu.json` - New
 
-#### כלי עזר
-- `check_gpu.py` - חדש
-- `run_training.py` - חדש
-- `setup.py` - חדש
-- `examples.py` - חדש
+#### Helper Tools
+- `check_gpu.py` - New
+- `run_training.py` - New
+- `setup.py` - New
+- `examples.py` - New
 
-#### קבצי הרצה
-- `run_gpu.bat` - חדש
-- `run_cpu.bat` - חדש
+#### Run Scripts
+- `run_gpu.bat` - New
+- `run_cpu.bat` - New
 
-#### תיעוד
-- `README.md` - עודכן
-- `PERFORMANCE_TIPS.md` - חדש
-- `requirements.txt` - חדש
-- `CHANGELOG.md` - חדש
+#### Documentation
+- `README.md` - Updated
+- `PERFORMANCE_TIPS.md` - New
+- `requirements.txt` - New
+- `CHANGELOG.md` - New
 
-### הוראות שימוש
+### Usage Instructions
 
-#### התקנה מהירה
+#### Quick Installation
 ```bash
 python setup.py
 ```
 
-#### הרצה עם GPU
+#### Run with GPU
 ```bash
 python run_training.py --gpu
-# או
+# or
 run_gpu.bat  # Windows
 ```
 
-#### הרצה עם CPU
+#### Run with CPU
 ```bash
 python run_training.py --cpu
-# או
+# or
 run_cpu.bat  # Windows
 ```
 
-#### בדיקת GPU
+#### Check GPU
 ```bash
 python check_gpu.py
 ```
 
-### תאימות
+### Compatibility
 
 #### Python
 - Python 3.8+
-- PyTorch 2.0+ (מומלץ)
+- PyTorch 2.0+ (recommended)
 
 #### GPU
-- NVIDIA GPU עם CUDA support
-- RTX 20xx+ (לשימוש ב-mixed precision)
-- RTX 30xx+ (לשימוש ב-model compilation)
+- NVIDIA GPU with CUDA support
+- RTX 20xx+ (for mixed precision)
+- RTX 30xx+ (for model compilation)
 
-#### מערכת הפעלה
+#### Operating System
 - Windows 10/11
 - Linux (Ubuntu 18.04+)
 - macOS (CPU only)
 
-### הערות חשובות
+### Important Notes
 
-1. **Mixed Precision**: דורש GPU עם Tensor Cores
-2. **Model Compilation**: דורש PyTorch 2.0+
-3. **Memory Management**: מומלץ 16GB+ RAM
-4. **Data Path**: עדכן נתיב הנתונים ב-config
+1. **Mixed Precision**: Requires GPU with Tensor Cores
+2. **Model Compilation**: Requires PyTorch 2.0+
+3. **Memory Management**: Recommended 16GB+ RAM
+4. **Data Path**: Update data path in config
 
-### בעיות ידועות
+### Known Issues
 
-1. **CUDA Out of Memory**: הקטן batch_size או הפעל gradient_accumulation
-2. **Slow Training**: בדוק num_workers ו-pin_memory
-3. **Import Errors**: התקן requirements.txt
+1. **CUDA Out of Memory**: Reduce batch_size or enable gradient_accumulation
+2. **Slow Training**: Check num_workers and pin_memory
+3. **Import Errors**: Install requirements.txt
 
-### תמיכה
+### Support
 
-לבעיות או שאלות:
-1. בדוק את `PERFORMANCE_TIPS.md`
-2. הרץ `python check_gpu.py`
-3. בדוק את `examples.py`
+For issues or questions:
+1. Check `PERFORMANCE_TIPS.md`
+2. Run `python check_gpu.py`
+3. Check `examples.py`
